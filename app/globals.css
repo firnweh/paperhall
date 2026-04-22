@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Literary typography for the reader ── */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap");
+
+:root {
+  --shadow-soft: 0 12px 28px -18px rgba(40, 25, 12, 0.5);
+}
+
+html, body {
+  background: theme("colors.paper.100");
+  color: theme("colors.ink.300");
+  font-family: theme("fontFamily.sans");
+  scroll-behavior: smooth;
+}
+
+/* ── Reader themes (applied to <body data-theme="..."> on /read/*) ── */
+body[data-theme="paper"] {
+  background: #f6eeda;
+  color: #231a14;
+}
+body[data-theme="sepia"] {
+  background: theme("colors.sepia.bg");
+  color: theme("colors.sepia.ink");
+}
+body[data-theme="night"] {
+  background: theme("colors.night.bg");
+  color: theme("colors.night.ink");
+}
+
+/* ── Article (rendered book content) typography — felt, not styled ── */
+.paperhall-prose {
+  font-family: theme("fontFamily.serif");
+  font-size: var(--reader-font-size, 1.125rem);
+  line-height: var(--reader-line-height, 1.85);
+  letter-spacing: 0.005em;
+  hyphens: auto;
+}
+.paperhall-prose h2 {
+  font-family: theme("fontFamily.display");
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.04em;
+  margin: 3.5rem 0 2rem;
+  color: currentColor;
+  opacity: 0.9;
+  text-transform: none;
+}
+.paperhall-prose h2::before,
+.paperhall-prose h2::after {
+  content: "· · ·";
+  display: block;
+  margin: 0.5rem 0;
+  opacity: 0.4;
+  font-size: 0.8rem;
+  letter-spacing: 0.4rem;
+}
+.paperhall-prose p {
+  margin: 0 0 1.2em;
+  text-indent: 1.5em;
+}
+.paperhall-prose p:first-child,
+.paperhall-prose h2 + p { text-indent: 0; }
+.paperhall-prose p:first-child::first-letter {
+  font-family: theme("fontFamily.display");
+  font-size: 3.2em;
+  float: left;
+  line-height: 0.9;
+  padding: 0.05em 0.1em 0 0;
+  color: currentColor;
+  opacity: 0.85;
+}
+.paperhall-prose .verse {
+  font-family: theme("fontFamily.serif");
+  font-size: 1.05rem;
+  white-space: pre-wrap;
+  margin: 2rem 0;
+  text-align: center;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+.paperhall-prose hr.break {
+  border: none;
+  text-align: center;
+  margin: 2.5rem 0;
+  color: currentColor;
+  opacity: 0.4;
+}
+.paperhall-prose hr.break::after {
+  content: "· · ·";
+  letter-spacing: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* ── Page-turn transition when opening a book ── */
+@keyframes open-book {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.reader-surface { animation: open-book 0.5s cubic-bezier(0.22, 0.9, 0.32, 1) both; }
+
+/* ── Ambient reading-desk background glows (used on /read/*) ── */
+.reading-desk-bg::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(246, 182, 96, 0.22) 0%, transparent 50%),
+    radial-gradient(circle at 15% 100%, rgba(74, 58, 42, 0.25) 0%, transparent 60%),
+    radial-gradient(circle at 85% 100%, rgba(74, 58, 42, 0.2) 0%, transparent 60%);
+  z-index: 0;
+}
+body[data-theme="night"] .reading-desk-bg::before {
+  background:
+    radial-gradient(circle at 50% 25%, rgba(246, 182, 96, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(30, 20, 10, 0.9) 0%, transparent 60%);
+}
+
+/* ── Focus rings keep the library calm but still accessible ── */
+*:focus-visible {
+  outline: 2px solid theme("colors.lamp");
+  outline-offset: 2px;
+  border-radius: 4px;
+}

@@ -1,0 +1,45 @@
+// Paperhall — local SQLite-backed library catalog.
+// All book content (cleaned text/HTML) lives on the filesystem under
+// /storage/books/<id>/ — the DB only stores metadata + the path.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./paperhall.db"
+}
+
+model Book {
+  id          String   @id            // stable kebab-case slug
+  title       String
+  author      String
+  language    String   @default("en")
+  category    String                  // Fiction, Philosophy, Science, ...
+  subjectsCsv String   @default("")   // comma-separated topical subjects
+  summary     String?
+  coverUrl    String?                 // optional remote cover; UI also has fallback
+  contentPath String                  // relative path under /storage/books/
+  wordCount   Int      @default(0)
+  isFeatured  Boolean  @default(false)
+  source      String   @default("gutenberg")
+  sourceId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  reading     ReadingProgress?
+
+  @@index([category])
+  @@index([author])
+}
+
+// One row per book (single-user MVP — no auth). Tracks resume position.
+model ReadingProgress {
+  bookId          String   @id
+  progressPercent Float    @default(0)
+  lastLocation    String?                  // chapter-id or scroll fraction
+  updatedAt       DateTime @updatedAt
+
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+}

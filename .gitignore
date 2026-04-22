@@ -1,0 +1,22 @@
+node_modules
+.next
+out
+build
+dist
+
+# Local data
+prisma/*.db
+prisma/*.db-journal
+
+# Storage of imported books — re-runnable via `npm run import:books`
+storage/
+
+# Cache of remote fetches during ingestion
+data/cache/
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
