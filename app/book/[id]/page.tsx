@@ -32,15 +32,15 @@ export default async function BookDetail({ params }: { params: Promise<{ id: str
                    background: "linear-gradient(160deg, #4a281f 0%, #2a1e14 100%)",
                    boxShadow: "inset 8px 0 12px -6px rgba(0,0,0,0.5), 0 20px 40px -14px rgba(40,25,12,0.6)",
                  }}>
-              {book.coverUrl && (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={book.coverUrl} alt={book.title} className="h-full w-full object-cover"
-                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-              )}
-              <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-5 text-paper-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+              <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-5 text-paper-50 [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
                 <div className="font-display text-xl leading-snug">{book.title}</div>
                 <div className="font-serif italic text-sm opacity-90">{book.author}</div>
               </div>
+              {book.coverUrl && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={book.coverUrl} alt="" referrerPolicy="no-referrer"
+                     className="absolute inset-0 z-0 h-full w-full object-cover opacity-90 mix-blend-multiply" />
+              )}
             </div>
           </div>
 

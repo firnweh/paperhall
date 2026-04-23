@@ -25,17 +25,16 @@ export function BookCard({ book, size = "md" }: { book: Book; size?: "sm" | "md"
           boxShadow: "inset 8px 0 10px -6px rgba(0,0,0,0.35), 0 12px 24px -12px rgba(42,30,20,0.45)",
         }}
       >
-        {book.coverUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={book.coverUrl} alt={book.title}
-               className="h-full w-full object-cover"
-               onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-        ) : null}
-        {/* Spine text (fallback when cover art fails) */}
-        <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-3 text-paper-50 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+        {/* Spine text — always renders, sits on the gradient. */}
+        <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-3 text-paper-50 [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
           <div className="font-display text-[15px] leading-snug">{book.title}</div>
           <div className="font-serif italic text-[11px] opacity-85">{book.author}</div>
         </div>
+        {book.coverUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={book.coverUrl} alt="" referrerPolicy="no-referrer"
+               className="absolute inset-0 z-0 h-full w-full object-cover opacity-90 mix-blend-multiply" />
+        ) : null}
       </div>
       {/* Shelf label under cover */}
       <div className="mt-3 w-full max-w-[11rem] text-center">
