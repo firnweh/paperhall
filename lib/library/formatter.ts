@@ -161,10 +161,24 @@ function stripContentsBlock(s: string): string {
   if (!m) return s;
   const lines = s.split(/\r?\n/);
   const startLine = lineOf(s, m.index!);
-  // Find next chapter heading after CONTENTS
-  for (let i = startLine + 1; i < lines.length; i++) {
-    if (CHAPTER_RE.test(lines[i].trim()) && isLikelyHeading(lines[i].trim()) && lines[i].length < 80) {
-      return lines.slice(i).join("\n");
+  // Require a strong chapter marker (CHAPTER/BOOK/PART/PREFACE/INTRODUCTION/…)
+  // rather than any CHAPTER_RE match — bare roman numerals like "III." appear
+  // in footnotes + annotation blocks and produce catastrophic over-stripping
+  // on short books (The Waste Land: poem lived between "Contents" and a
+  // footnote "III." 780 lines later → entire poem wiped).
+  const STRONG_HEADING =
+    /^\s*(CHAPTER|BOOK|PART|VOLUME|CANTO|SECTION|PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|FOREWORD|APPENDIX)\b/i;
+  // Also cap the search window: a real TOC ends within the first ~30% of the
+  // file. Past that, we're matching something unrelated.
+  const windowEnd = Math.min(lines.length, startLine + Math.ceil(lines.length * 0.3) + 50);
+  for (let i = startLine + 1; i < windowEnd; i++) {
+    const t = lines[i].trim();
+    if (STRONG_HEADING.test(t) && isLikelyHeading(t) && lines[i].length < 80) {
+      const cut = lines.slice(i).join("\n");
+      // Safety net — if we'd strip away >80% of the body, we likely matched
+      // the wrong heading. Better to keep the TOC than lose the book.
+      if (cut.length < s.length * 0.2) return s;
+      return cut;
     }
   }
   return s;
