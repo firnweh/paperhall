@@ -1,75 +1,84 @@
-import { prisma } from "../db";
-import fs from "node:fs/promises";
-import path from "node:path";
+import booksData from "../../data/books.json";
 
 /**
  * Library query helpers used by server components + route handlers.
- * Everything is local — no network calls at runtime.
+ *
+ * The catalogue is a static JSON file (data/books.json) imported at build time —
+ * no database, no filesystem reads, no network at runtime. Book *text* lives as
+ * static files under public/books/<id>/content.html and is fetched by the reader
+ * on the client. This keeps the whole site static-friendly and CDN-deployable.
  */
 
+export type Book = {
+  id: string;
+  title: string;
+  author: string;
+  language: string;
+  category: string;
+  subjectsCsv: string;
+  summary: string | null;
+  coverUrl: string | null;
+  contentPath: string;
+  wordCount: number;
+  isFeatured: boolean;
+  source: string;
+  sourceId: string | null;
+  gutenbergId?: number;
+};
+
+const ALL: Book[] = (booksData as Partial<Book>[]).map((b) => ({
+  id: b.id!,
+  title: b.title || "Untitled",
+  author: b.author || "Unknown",
+  language: b.language || "en",
+  category: b.category || "Fiction",
+  subjectsCsv: b.subjectsCsv || "",
+  summary: b.summary ?? null,
+  coverUrl: b.coverUrl ?? null,
+  contentPath: b.contentPath || `${b.id}/content.html`,
+  wordCount: b.wordCount || 0,
+  isFeatured: Boolean(b.isFeatured),
+  source: b.source || "gutenberg",
+  sourceId: b.sourceId ?? (b.gutenbergId != null ? String(b.gutenbergId) : null),
+  gutenbergId: b.gutenbergId,
+}));
+
+const byFeaturedThenTitle = (a: Book, b: Book) =>
+  Number(b.isFeatured) - Number(a.isFeatured) || a.title.localeCompare(b.title);
+
 export async function allBooks() {
-  return prisma.book.findMany({
-    orderBy: [{ isFeatured: "desc" }, { title: "asc" }],
-  });
+  return [...ALL].sort(byFeaturedThenTitle);
 }
 
 export async function featuredBooks(limit = 12) {
-  return prisma.book.findMany({
-    where: { isFeatured: true },
-    take: limit,
-    orderBy: { title: "asc" },
-  });
+  return ALL.filter((b) => b.isFeatured).sort((a, b) => a.title.localeCompare(b.title)).slice(0, limit);
 }
 
 export async function popularBooks(limit = 12) {
-  // MVP "popular" = hand-curated well-known titles by slug match
   const SLUGS = [
     "pride-and-prejudice", "alice-wonderland", "frankenstein", "dracula",
     "moby-dick", "odyssey", "hamlet", "walden",
     "meditations", "crime-punishment", "treasure-island", "origin-of-species",
   ];
-  const books = await prisma.book.findMany({
-    where: { id: { in: SLUGS } },
-    take: limit,
-  });
-  // Preserve curated order
-  return SLUGS.map((s) => books.find((b) => b.id === s)).filter(Boolean);
+  const map = new Map(ALL.map((b) => [b.id, b]));
+  return SLUGS.map((s) => map.get(s)).filter((b): b is Book => Boolean(b)).slice(0, limit);
 }
 
 export async function booksByCategory(label: string) {
-  return prisma.book.findMany({
-    where: { category: { equals: label } },
-    orderBy: [{ isFeatured: "desc" }, { title: "asc" }],
-  });
+  return ALL.filter((b) => b.category === label).sort(byFeaturedThenTitle);
 }
 
 export async function getBook(id: string) {
-  return prisma.book.findUnique({ where: { id } });
+  return ALL.find((b) => b.id === id) ?? null;
 }
 
 export async function searchBooks(q: string) {
   const needle = q.trim().toLowerCase();
   if (!needle) return [];
-  // SQLite has no native LOWER index, but the dataset is small (~100 rows)
-  // so scanning + case-insensitive compare in memory is fine.
-  const all = await prisma.book.findMany();
-  return all.filter((b) =>
+  return ALL.filter((b) =>
     b.title.toLowerCase().includes(needle) ||
     b.author.toLowerCase().includes(needle) ||
     b.category.toLowerCase().includes(needle) ||
     b.subjectsCsv.toLowerCase().includes(needle)
   );
-}
-
-/**
- * Load the stored book content from /storage/books/<id>/content.html.
- * Returns null if missing — pages should degrade gracefully.
- */
-export async function loadBookContent(id: string): Promise<string | null> {
-  const abs = path.join(process.cwd(), "storage", "books", id, "content.html");
-  try {
-    return await fs.readFile(abs, "utf8");
-  } catch {
-    return null;
-  }
 }

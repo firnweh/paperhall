@@ -8,9 +8,9 @@ export default function About() {
       <main className="mx-auto max-w-3xl px-6 pb-16 pt-14 font-serif">
         <h1 className="font-display text-4xl text-ink-500">About the library</h1>
         <p className="mt-5 text-[17px] leading-relaxed">
-          Paperhall is a small, curated digital library — one hundred well-known
-          books kept locally, read quietly. It was built to feel like walking into
-          a library, not opening a bookstore.
+          Paperhall is a curated digital library — over three hundred well-known
+          books kept locally, read quietly as real, page-turning books. It was
+          built to feel like walking into a library, not opening a bookstore.
         </p>
         <h2 className="mt-10 font-display text-xl text-ink-500">What&apos;s on the shelves</h2>
         <p className="mt-3 text-[16px] leading-relaxed">
@@ -22,9 +22,9 @@ export default function About() {
         </p>
         <h2 className="mt-10 font-display text-xl text-ink-500">How it works</h2>
         <ul className="mt-3 list-disc space-y-2 pl-6 text-[16px] leading-relaxed">
-          <li>One curated manifest (<code>data/books.json</code>) lists the 100 chosen titles.</li>
+          <li>One curated manifest (<code>data/books.json</code>) lists every title in the library.</li>
           <li>A local ingestion pipeline downloads + cleans each text once and stores it on disk.</li>
-          <li>Metadata lives in a small SQLite database; book content sits under <code>storage/books/</code>.</li>
+          <li>Metadata lives in that static JSON manifest; book content sits under <code>storage/books/</code> as plain HTML.</li>
           <li>At read-time, the app never touches the network — it just reads from your disk.</li>
           <li>Your shelf, bookmarks and reading progress stay in your browser&apos;s localStorage.</li>
         </ul>
