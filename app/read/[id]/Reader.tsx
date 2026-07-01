@@ -46,6 +46,9 @@ const HL_COLORS = [
   { key: "purple", css: "#dcc2ff" },
 ];
 const FLIP_MS = 720;
+// Book text is served from object storage (Vercel Blob) in production; falls back
+// to local /public/books in dev when the env var is unset.
+const CONTENT_BASE = process.env.NEXT_PUBLIC_CONTENT_BASE || "";
 
 /* ── text helpers ── */
 function escapeHtml(s: string) {
@@ -215,7 +218,7 @@ export function Reader({ book }: { book: Book }) {
   useEffect(() => {
     let alive = true;
     setAtoms(null); setErr(false);
-    fetch(`/books/${book.id}/content.html`)
+    fetch(`${CONTENT_BASE}/books/${book.id}/content.html`)
       .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`))))
       .then((text) => {
         if (!alive) return;
