@@ -1,0 +1,7 @@
+# Book text is served from Vercel Blob (the CDN), not from the deployment.
+# Keeping it out of the upload keeps deploys tiny no matter how many books exist.
+public/books
+
+# dev / tooling not needed at runtime
+scripts
+prisma
