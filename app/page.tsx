@@ -48,7 +48,7 @@ export default async function LibraryLobby() {
             Welcome to Paperhall.
           </h1>
           <p className="mx-auto mt-3 max-w-xl font-serif text-lg italic text-ink-200">
-            Over 300 timeless books — stored locally, read quietly. Pick one from the shelves and bring it to the reading desk.
+            {all.length.toLocaleString()} timeless books — read quietly, right in your browser. Pick one from the shelves and bring it to the reading desk.
           </p>
         </section>
 
