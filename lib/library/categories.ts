@@ -19,6 +19,7 @@ export const CATEGORIES: Category[] = [
   { id: "poetry",      label: "Poetry",      blurb: "Verse — short, dense, and meant to be reread.",      accent: "#7c3a6e", emoji: "🪶" },
   { id: "drama",       label: "Drama",       blurb: "Plays — Shakespeare, Ibsen, Wilde on the stage.",    accent: "#7c4a3a", emoji: "🎭" },
   { id: "essays",      label: "Essays",      blurb: "Walden, Federalist, Mill — argument made personal.", accent: "#5e3a7c", emoji: "🖋" },
+  { id: "academic",    label: "Academic",    blurb: "Scholarship — economics, maths, law, mind, and method.", accent: "#4a5a6c", emoji: "🎓" },
   { id: "children",    label: "Children",    blurb: "The books we read first, that we still re-read.",    accent: "#7c5e3a", emoji: "🧸" },
   { id: "adventure",   label: "Adventure",   blurb: "Maps, sea-voyages, hidden treasure, escape.",        accent: "#5e7c3a", emoji: "🗺" },
   { id: "mystery",     label: "Mystery",     blurb: "Detectives, gothic houses, the unaccounted noise.",  accent: "#3a3a7c", emoji: "🔎" },
