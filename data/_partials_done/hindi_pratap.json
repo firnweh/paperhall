@@ -1,0 +1,50 @@
+[
+  {
+    "id": "pratapa-piyusha",
+    "title": "प्रताप पीयूष",
+    "author": "प्रतापनारायण मिश्र",
+    "language": "hi",
+    "category": "Hindi",
+    "subjectsCsv": "Pratap Narayan Mishra, pratapa piyusha, Hindi literature",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "pratapa-piyusha/content.html",
+    "wordCount": 55706,
+    "isFeatured": false,
+    "source": "wikisource",
+    "sourceId": "प्रताप पीयूष",
+    "gutenbergId": null
+  },
+  {
+    "id": "bharata-durdasha",
+    "title": "भारत दुर्दशा",
+    "author": "प्रतापनारायण मिश्र",
+    "language": "hi",
+    "category": "Hindi",
+    "subjectsCsv": "Pratap Narayan Mishra, bharata durdasha, Hindi literature",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "bharata-durdasha/content.html",
+    "wordCount": 191,
+    "isFeatured": false,
+    "source": "wikisource",
+    "sourceId": "भारतेंदु-नाटकावली/६–भारत दुर्दशा",
+    "gutenbergId": null
+  },
+  {
+    "id": "upakrama",
+    "title": "उपक्रम",
+    "author": "प्रतापनारायण मिश्र",
+    "language": "hi",
+    "category": "Hindi",
+    "subjectsCsv": "Pratap Narayan Mishra, upakrama, Hindi literature",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "upakrama/content.html",
+    "wordCount": 7558,
+    "isFeatured": false,
+    "source": "wikisource",
+    "sourceId": "शैवसर्वस्व/उपक्रम",
+    "gutenbergId": null
+  }
+]

@@ -41,13 +41,20 @@ def main():
         for e in json.load(open(os.path.join(PART, pf))):
             gid, slug = e.get("gutenbergId"), e["id"]
             wk = wkey(e["title"], e["author"])
-            if gid in seen_ids:
+            # gutenbergId dedup only for Gutenberg books (Hindi/wikisource have none);
+            # skip the empty work-key so Devanagari titles (which normalize to "")
+            # aren't all collapsed into one — they dedup by unique romanized slug.
+            if gid and gid in seen_ids:
                 dup_id += 1; continue
-            if wk in seen_works:
+            if wk != ("", ()) and wk in seen_works:
                 dup_work += 1; continue
             if slug in seen_slugs:
                 dup_slug += 1; continue
-            seen_ids.add(gid); seen_slugs.add(slug); seen_works.add(wk)
+            if gid:
+                seen_ids.add(gid)
+            seen_slugs.add(slug)
+            if wk != ("", ()):
+                seen_works.add(wk)
             added.append(e); per_cat[e["category"]] += 1
 
     merged = existing + added

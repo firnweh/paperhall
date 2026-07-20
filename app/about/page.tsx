@@ -25,9 +25,11 @@ export default async function About() {
           {total.toLocaleString()} books across {shelves.length} shelves —{" "}
           {shelves.slice(0, -1).join(", ")} and {shelves[shelves.length - 1]}. From Homer,
           Shakespeare and Dostoevsky to a deep <b>Academic</b> shelf — economics,
-          mathematics, psychology, law, political science, and the natural sciences. Every
-          book is in the public domain, sourced from Project Gutenberg and cleaned of
-          boilerplate for comfortable reading.
+          mathematics, psychology, law, political science, and the natural sciences — and a{" "}
+          <b>Hindi</b> shelf in Devanagari: Premchand, Jaishankar Prasad, Nirala, Tulsidas,
+          Kabir, Surdas and the classics. Every book is in the public domain, sourced from
+          Project Gutenberg and Hindi Wikisource, cleaned of boilerplate for comfortable
+          reading.
         </p>
 
         <h2 className="mt-10 font-display text-xl text-ink-500">How it works</h2>

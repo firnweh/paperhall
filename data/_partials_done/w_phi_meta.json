@@ -1,0 +1,34 @@
+[
+  {
+    "id": "chance-love-and-logic-philosophical-essays",
+    "title": "Chance, Love, and Logic: Philosophical Essays",
+    "author": "Charles S. Peirce",
+    "language": "en",
+    "category": "Philosophy",
+    "subjectsCsv": "Metaphysics, Peirce, Charles S. (Charles Sanders), 1839-1914 -- Bibliography, Pragmatism, Science -- Philosophy",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "chance-love-and-logic-philosophical-essays/content.html",
+    "wordCount": 97432,
+    "isFeatured": false,
+    "source": "gutenberg",
+    "sourceId": "65274",
+    "gutenbergId": 65274
+  },
+  {
+    "id": "old-fashioned-ethics-and-common-sense",
+    "title": "Old-Fashioned Ethics and Common-Sense Metaphysics: With Some of Their Applications",
+    "author": "William Thomas Thornton",
+    "language": "en",
+    "category": "Philosophy",
+    "subjectsCsv": "Metaphysics, Utilitarianism",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "old-fashioned-ethics-and-common-sense/content.html",
+    "wordCount": 90448,
+    "isFeatured": false,
+    "source": "gutenberg",
+    "sourceId": "29917",
+    "gutenbergId": 29917
+  }
+]

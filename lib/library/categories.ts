@@ -24,6 +24,7 @@ export const CATEGORIES: Category[] = [
   { id: "adventure",   label: "Adventure",   blurb: "Maps, sea-voyages, hidden treasure, escape.",        accent: "#5e7c3a", emoji: "🗺" },
   { id: "mystery",     label: "Mystery",     blurb: "Detectives, gothic houses, the unaccounted noise.",  accent: "#3a3a7c", emoji: "🔎" },
   { id: "global",      label: "Global Classics", blurb: "Cervantes, Homer, Dostoevsky, Tolstoy.",         accent: "#7c3a4a", emoji: "🌐" },
+  { id: "hindi",       label: "Hindi",       blurb: "हिंदी साहित्य — Premchand, Prasad, Tulsidas, Kabir and the classics, in Devanagari.", accent: "#c2622c", emoji: "🪔" },
   { id: "self",        label: "Self & Stoic", blurb: "Quiet, practical wisdom — Stoics + moderns.",       accent: "#3a7c7c", emoji: "🕯" },
   { id: "sci-fi",      label: "Sci-Fi",      blurb: "Time-machines, invisible men, Flatland.",            accent: "#7c5e3a", emoji: "🚀" },
   { id: "memoir",      label: "Memoir",      blurb: "First-person lives, told quietly.",                  accent: "#3a5e7c", emoji: "✍️" },

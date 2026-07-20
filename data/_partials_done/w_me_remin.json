@@ -1,0 +1,50 @@
+[
+  {
+    "id": "forty-years-of-spy",
+    "title": "Forty years of 'Spy'",
+    "author": "Leslie Ward",
+    "language": "en",
+    "category": "Memoir",
+    "subjectsCsv": "Artists -- Correspondence, reminiscences, etc., Painters -- Great Britain -- Biography, Ward, Leslie, Sir, 1851-1922",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "forty-years-of-spy/content.html",
+    "wordCount": 101710,
+    "isFeatured": false,
+    "source": "gutenberg",
+    "sourceId": "35466",
+    "gutenbergId": 35466
+  },
+  {
+    "id": "the-middle-years",
+    "title": "The Middle Years",
+    "author": "Henry James",
+    "language": "en",
+    "category": "Memoir",
+    "subjectsCsv": "Authors -- Correspondence, reminiscences, etc., James, Henry, 1843-1916",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "the-middle-years/content.html",
+    "wordCount": 22252,
+    "isFeatured": false,
+    "source": "gutenberg",
+    "sourceId": "32649",
+    "gutenbergId": 32649
+  },
+  {
+    "id": "in-bohemia-with-du-maurier-the",
+    "title": "In Bohemia with Du Maurier: The First of a Series of Reminiscences",
+    "author": "Felix Moscheles",
+    "language": "en",
+    "category": "Memoir",
+    "subjectsCsv": "Artists -- Correspondence, reminiscences, etc., Du Maurier, George, 1834-1896, Moscheles, Felix, 1833-1917",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "in-bohemia-with-du-maurier-the/content.html",
+    "wordCount": 18118,
+    "isFeatured": false,
+    "source": "gutenberg",
+    "sourceId": "13517",
+    "gutenbergId": 13517
+  }
+]

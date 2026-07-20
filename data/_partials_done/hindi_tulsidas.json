@@ -1,0 +1,34 @@
+[
+  {
+    "id": "kavitavali",
+    "title": "कवितावली",
+    "author": "तुलसीदास",
+    "language": "hi",
+    "category": "Hindi",
+    "subjectsCsv": "Tulsidas, kavitavali, Hindi literature",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "kavitavali/content.html",
+    "wordCount": 84135,
+    "isFeatured": false,
+    "source": "wikisource",
+    "sourceId": "कवितावली",
+    "gutenbergId": null
+  },
+  {
+    "id": "ramacharitamanasa",
+    "title": "रामचरितमानस",
+    "author": "तुलसीदास",
+    "language": "hi",
+    "category": "Hindi",
+    "subjectsCsv": "Tulsidas, ramacharitamanasa, Hindi literature",
+    "summary": null,
+    "coverUrl": null,
+    "contentPath": "ramacharitamanasa/content.html",
+    "wordCount": 52701,
+    "isFeatured": false,
+    "source": "wikisource",
+    "sourceId": "रामचरितमानस",
+    "gutenbergId": null
+  }
+]
